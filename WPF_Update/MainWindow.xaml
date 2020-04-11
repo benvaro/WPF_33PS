@@ -1,0 +1,27 @@
+﻿<Window x:Class="WPF_Update.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_Update"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <StackPanel>
+        <Slider x:Name="slider"
+                Value="16" Minimum="5" Maximum="100" 
+                Margin="20"
+                TickFrequency="10"
+                TickPlacement="Both"
+                IsSnapToTickEnabled="True"/>
+        <!--Two way - зміна властивості змінить і джерело прив'язки-->
+        <Label Name="label" 
+               Content="Hello"
+               FontSize="{Binding ElementName=slider, Path=Value, Mode=TwoWay}"
+               />
+        <TextBox x:Name="textBox" Text="{Binding ElementName=label,
+                                    Path=FontSize, Mode=TwoWay,
+                                UpdateSourceTrigger=LostFocus}" Margin="20"/>   
+        <!--UpdateSourceTrigger - LostFocus - зміни відбудуться тільки після втрати фокуса, 
+        по замовчуванню для ТекстБокса, для всіх інших - PropertyChanged-->
+    </StackPanel>
+</Window>
